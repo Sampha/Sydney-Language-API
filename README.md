@@ -1,28 +1,27 @@
-<<<<<<< HEAD
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is the readme for the free & open Sydney Language API
 
-Things you may want to cover:
+Endpoints available:
+/dharug_words - Will output an array of every word in the database in the following format {
+  dharug_word: string
+  english_word: string
+  source: array of strings
+}
 
-* Ruby version
+/dharug_words/show?dharug=()?english=() - Takes dharug or english paramaters and outputs array of all words matching either, will only output one or the other, if dharug parameter is parsed in, will always use it first
+uses the following format {
+  dharug_word: string
+  english_word: string
+  source: array of strings
+}
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-=======
-# Sydney-Language-API
->>>>>>> 53ed8b91dee10d36d45bb0818dd985a4e7408584
+*To be developed*
+- Alternate Vocabulary relationship
+- Presenting alternate vocabulary in words Endpoints
+- Sources endpoint
+- Words by Source endpoint
+- Sound system back-end
+- Sounds system endpoint
+- Grammar rules back-end
+- Grammar rules endpoint 
