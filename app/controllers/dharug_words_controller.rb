@@ -9,11 +9,24 @@ class DharugWordsController < ApplicationController
       word.source.each do |source|
         @sources << source.shorthand
       end
+      #for each alternate vocab loop to clean up data and sources
+      @alternate_vocabulary = Array.new
+      word.alternate_vocabularies.each do |alt|
+        @alt_sources = Array.new
+        alt.source.each do |alt_source|
+          @alt_sources << alt_source.shorthand
+        end
+        @alternate_vocabulary << {
+          alternate_vocabulary: alt.dharug_word,
+          sources: @alt_sources
+        }
+      end
       #Refine the data to be presented
       @dharug << {
         :dharug_word => word.dharug_word,
         :enlgish_word => word.english_word,
-        :sources => @sources
+        :sources => @sources,
+        :alternate_vocabulary => @alternate_vocabulary
       }
 
     end
@@ -28,10 +41,22 @@ class DharugWordsController < ApplicationController
       word.source.each do |source|
         @sources << source.shorthand
       end
+      @alternate_vocabulary = Array.new
+      word.alternate_vocabularies.each do |alt|
+        @alt_sources = Array.new
+        alt.source.each do |alt_source|
+          @alt_sources << alt_source.shorthand
+        end
+        @alternate_vocabulary << {
+          alternate_vocabulary: alt.dharug_word,
+          sources: @alt_sources
+        }
+      end
       @dharug << {
         :dharug_word => word.dharug_word,
         :enlgish_word => word.english_word,
-        :sources => @sources
+        :sources => @sources,
+        :alternate_vocabulary => @alternate_vocabulary
       }
     end
     render json:@dharug
@@ -49,7 +74,7 @@ class DharugWordsController < ApplicationController
         @search_results = Dharug.where("lower(dharug_word) = ?", params[:dharug].downcase)
       elsif(params.has_key?(:english))
         @search_results = Dharug.where("lower(english_word) =?", params[:english].downcase)
-
     end
+    
   end
 end

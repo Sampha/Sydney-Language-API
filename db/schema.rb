@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_30_044313) do
+ActiveRecord::Schema.define(version: 2019_01_30_090546) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,14 @@ ActiveRecord::Schema.define(version: 2019_01_30_044313) do
     t.string "dharug_word"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "dharug_id"
+    t.index ["dharug_id"], name: "index_alternate_vocabularies_on_dharug_id"
+  end
+
+  create_table "alternate_vocabularies_sources", force: :cascade do |t|
+    t.integer "alternate_vocabulary_id"
+    t.integer "source_id"
+    t.index ["source_id"], name: "index_alternate_vocabularies_sources_on_source_id"
   end
 
   create_table "dharugs", force: :cascade do |t|
